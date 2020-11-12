@@ -24,7 +24,7 @@ jobs:
         run: echo "docs_dir=./docs" >> $GITHUB_ENV
         if:  ${{ env.directory_path }} == ''
       - name: Build doc
-        working-directory: $docs_dir
         run: |
+          cd $docs_dir
           make clean html linkcheck
         
