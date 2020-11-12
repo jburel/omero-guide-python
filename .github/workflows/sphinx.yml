@@ -13,13 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      working-directory: ./docs
+      docs-directory: ./docs
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Sphinx install
         run: pip install --upgrade sphinx
       - name: Build doc
-        working-directory: ${{ env.working-directory }}
+        working-directory: ${{ env.docs-directory }}
         run: |
           make clean html linkcheck
