@@ -14,17 +14,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env: 
-      directory: ${{ secrets.directory_path }}
+      directory: 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Sphinx install
         run: pip install --upgrade sphinx
-      - name: Set directory
-        run: ${{ env.directory }} = "./docs"
-        if:  ${{ env.directory }} == ''
+      - name: Set docs directory 
+        run: echo "docs_dir=./docs" >> $GITHUB_ENV 
+        if:  secrets.directory_path == ''
+      - name: Set docs directory 
+        run: echo "docs_dir=secrets.directory_path" >> $GITHUB_ENV 
+        if:  secrets.directory_path != ''
       - name: Build doc
-        working-directory: ${{ env.directory }}
+        working-directory: $docs_dir
         run: |
           make clean html linkcheck
         
