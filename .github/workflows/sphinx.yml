@@ -20,7 +20,7 @@ jobs:
         run: pip install --upgrade sphinx
       - name: Set directory
         run: |
-          echo "::set-env name=DOCS_DIR::${{ ${{ secrets.directory_path }} ".format("./docs")
+          print("::set-env name=DOCS_DIR::${{ secrets.directory_path }}".format("./docs"))
       - name: Build doc
         working-directory: $DOCS_DIR
         run: |
