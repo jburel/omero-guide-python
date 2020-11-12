@@ -25,24 +25,20 @@ jobs:
         run: echo "docs_dir=./docs" >> $GITHUB_ENV
         if: ${{ env.directory_path == '' }}
       - name: Set directory
+        run: echo "docs_dir="${{ env.directory_path }} >> $GITHUB_ENV
         if: ${{ env.directory_path != '' }}
-        run: |
-          echo "docs_dir="${{ env.directory_path }} >> $GITHUB_ENV
       - name: Set linkcheck option
         run: echo "link=true" >> $GITHUB_ENV
         if: ${{ env.check_link == '' }}
       - name: Set linkcheck option
+        run: echo "link=false" >> $GITHUB_ENV
         if: ${{ env.check_link != '' }}
-        run: |
-          echo "link=false" >> $GITHUB_ENV
       - name: Build doc
         run: |
           cd $docs_dir
           if [ "$link" = true ]; then
-            echo "Running linkcheck"
             make clean html linkcheck
           else
-            echo "NOT Running linkcheck"
             make clean html
           fi 
         
