@@ -1,0 +1,23 @@
+# Builds the Sphinx documentation in the docs folder
+
+---
+name: sphinx
+
+on: 
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Sphinx install
+        run: pip install --upgrade sphinx
+      - name: Build doc
+        working-directory: docs
+        run: |
+          make clean html linkcheck
