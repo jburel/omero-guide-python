@@ -38,7 +38,7 @@ jobs:
       - name: Build doc
         run: |
           cd $docs_dir
-          if [ $link ]; then
+          if [ "$link" = true ]; then
             echo "Running linkcheck"
             make clean html linkcheck
           else
