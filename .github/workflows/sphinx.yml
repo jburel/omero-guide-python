@@ -24,9 +24,9 @@ jobs:
         run: echo "docs_dir=./docs" >> $GITHUB_ENV
         if:  ${{ env.directory_path }} == ''
       - name: Set directory
-        if:  ${{ env.directory_path }} == false
+        if:  ${{ env.directory_path }} != null
         run: |
-          echo "\"${{ env.directory_path }}"|"
+          echo ${{ env.directory_path }}
           echo "docs_dir="${{ env.directory_path }} >> $GITHUB_ENV
       - name: Build doc
         run: |
