@@ -22,10 +22,10 @@ jobs:
         run: pip install --upgrade sphinx
       - name: Set docs directory 
         run: echo "docs_dir=./docs" >> $GITHUB_ENV 
-        if:  secrets.directory_path == ''
+        if:  ${{ secrets.directory_path }} == ''
       - name: Set docs directory 
-        run: echo "docs_dir=secrets.directory_path" >> $GITHUB_ENV 
-        if:  secrets.directory_path != ''
+        run: echo "docs_dir="${{ secrets.directory_path }} >> $GITHUB_ENV 
+        if:  ${{ secrets.directory_path }} != ''
       - name: Build doc
         working-directory: $docs_dir
         run: |
