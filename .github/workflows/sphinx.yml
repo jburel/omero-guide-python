@@ -13,14 +13,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ secrets.directory_path || "./docs" }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Sphinx install
         run: pip install --upgrade sphinx
+      - name: Set directory
+        run: |
+          echo "::set-env name=DOCS_DIR::${{ ${{ secrets.directory_path }} ".format("./docs")
       - name: Build doc
+        working-directory: $DOCS_DIR
         run: |
           make clean html linkcheck
+        
