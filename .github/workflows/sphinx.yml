@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       directory_path: ${{ secrets.directory_path }}
-      check_link: ${{ secrets.check_link }}
+      check_link: foo
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -42,6 +42,7 @@ jobs:
             echo "Running linkcheck"
             make clean html linkcheck
           else
+            echo "NOT Running linkcheck"
             make clean html
           fi 
         
