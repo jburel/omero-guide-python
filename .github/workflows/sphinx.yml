@@ -21,11 +21,10 @@ jobs:
       - name: Sphinx install
         run: pip install --upgrade sphinx
       - name: Set docs directory 
-        run: |
-          echo ${{ env.directory_path }}
-          echo "docs_dir=./docs" >> $GITHUB_ENV 
+        run: echo "docs_dir=./docs" >> $GITHUB_ENV
+        if:  ${{ env.directory_path }} == ''
       - name: Build doc
-        working-directory: ./docs
+        working-directory: $docs_dir
         run: |
           make clean html linkcheck
         
