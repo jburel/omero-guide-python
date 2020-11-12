@@ -18,6 +18,6 @@ jobs:
       - name: Sphinx install
         run: pip install --upgrade sphinx
       - name: Build doc
-        working-directory: docs
+        working-directory: ./docs
         run: |
           make clean html linkcheck
