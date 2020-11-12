@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       directory_path: ${{ secrets.directory_path }}
-      check_link: foo
+      check_link: ${{ secrets.check_link }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
