@@ -28,6 +28,7 @@ jobs:
         if:  ${{ env.directory_path }} != ''
       - name: Build doc
         run: |
+          echo "|"${{ env.directory_path }}"|"
           cd $docs_dir
           make clean html linkcheck
         
