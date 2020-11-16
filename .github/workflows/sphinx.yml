@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env: 
-      directory_path:
+      directory_path: ./docs
       check_link: true # set to false to remove linkcheck
     steps:
       - uses: actions/checkout@v2
