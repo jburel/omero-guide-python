@@ -25,7 +25,7 @@ jobs:
         run: |
           VAR=${{ env.directory_path }}
           V=${VAR:-./docs}
-          echo "docs_dir="${VAR} >> $GITHUB_ENV
+          echo "docs_dir="${V} >> $GITHUB_ENV
       - name: Build doc
         run: |
           cd $docs_dir
