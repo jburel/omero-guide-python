@@ -13,25 +13,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: 
-      directory_path: ./docs
-      check_link: true # set to false to remove linkcheck
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - name: Sphinx install
         run: pip install --upgrade sphinx
       - name: Set directory
-        run: echo "docs_dir=./docs" >> $GITHUB_ENV
-        if: ${{ env.directory_path == '' }}
-      - name: Set directory
-        run: echo "docs_dir="${{ env.directory_path }} >> $GITHUB_ENV
-        if: ${{ env.directory_path != '' }}
+        run: echo "docs_dir="${${{ env.directory_path }}:-./docs} >> $GITHUB_ENV
       - name: Build doc
         run: |
           cd $docs_dir
-          if [ "${{ env.check_link }}" = true ]; then
-            make clean html linkcheck
-          else
-            make clean html
-          fi
+          make clean html
