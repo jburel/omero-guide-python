@@ -23,8 +23,8 @@ jobs:
         run: pip install --upgrade sphinx
       - name: Set directory
         run: |
-        VAR=${${{ env.directory_path }}:=./docs}
-        echo "docs_dir="${VAR} >> $GITHUB_ENV
+          VAR=${${{ env.directory_path }}:=./docs}
+          echo "docs_dir="${VAR} >> $GITHUB_ENV
       - name: Build doc
         run: |
           cd $docs_dir
