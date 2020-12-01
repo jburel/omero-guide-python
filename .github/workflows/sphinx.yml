@@ -15,23 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       directory_path:
-      check_link: true # set to false to remove linkcheck
+      sphinx_commands: clean html linkcheck # commands to run. Update accordingly
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Sphinx install
+        run: pip install --upgrade sphinx
       - name: Set directory
-        run: |
+        run:  |
           VAR=${{ env.directory_path }}
           echo "docs_dir="${VAR:-./docs} >> $GITHUB_ENV
-      - name: Set command
-        run: |
-          if [ "${{ env.check_link }}" = true ]; then
-            echo "docs_command=make clean html linkcheck" >> $GITHUB_ENV
-          else
-            echo "docs_command=make clean html" >> $GITHUB_ENV
-          fi
-          
       - name: Build doc
-        uses: ammaraskar/sphinx-action@master
-        with:
-          docs-folder: ${{ env.docs_dir }}
-          build-command: ${{ env.docs_command }}
+        run: |
+          cd $docs_dir
+          make ${{ env.sphinx_commands }}
