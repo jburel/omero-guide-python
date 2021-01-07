@@ -10,3 +10,4 @@ dependencies:
     - dask-image
     - stardist
     - tensorflow
+    - jupyter-notebookparams
