@@ -35,12 +35,10 @@ jobs:
         id: get_version
         run: |
           if [[ ${{ github.ref }} =~ 'refs/tags/' ]]; then
-            echo ::set-output name=VERSION::${{ github.event.pull_request.number }}
+            echo ::set-output name=VERSION::"PR"${{ steps.findPr.outputs.pr }}
           else
             echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
           fi
-          echo ${{ github.event.pull_request.number }}
-          
       - name: Get PR number
         run: |
           echo ${{ steps.get_version.outputs.VERSION }}
