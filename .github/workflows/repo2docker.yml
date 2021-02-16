@@ -24,16 +24,14 @@ jobs:
             echo "::set-output name=nopush::true"
           fi
         shell: bash
-      - name: Get the version
-        if: startsWith(github.ref, 'refs/tags')
+      - name: Get the tag version or the PR number
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-      - name: update jupyter dependencies with repo2docker
-        uses: jupyterhub/repo2docker-action@master
-        with:
-          NO_PUSH: ${{ steps.nopush.outputs.nopush }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          PUBLIC_REGISTRY_CHECK: true
-          ADDITIONAL_TAG: ${{ steps.get_version.outputs.VERSION }}
-          IMAGE_NAME: ${{ github.repository }}
+        run: |
+          if [[ ${{ github.ref }} =~ 'refs/tags/' ]]; then
+            echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+          else
+            echo ::set-output name=VERSION::${{ github.event.number }}
+          fi
+      - name: Get PR number
+        run: |
+          echo ${{ steps.get_version.outputs.VERSION }}
