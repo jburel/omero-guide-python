@@ -32,6 +32,7 @@ jobs:
           else
             echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
           fi
+          echo ${{ github.event.pull_request.number }}
       - name: Get PR number
         run: |
           echo ${{ steps.get_version.outputs.VERSION }}
