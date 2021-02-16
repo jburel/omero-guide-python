@@ -28,7 +28,7 @@ jobs:
         id: findPr
       # This will echo "Your PR is 7", or be skipped if there is no current PR.
       - run: echo "Your PR is ${PR}"
-        if: success() && ${{ steps.findPr.outputs.number }}
+        if: success() && steps.findPr.outputs.number
         env:
           PR: ${{ steps.findPr.outputs.pr }}
       - name: Get the tag version or the PR number
@@ -40,6 +40,7 @@ jobs:
             echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
           fi
           echo ${{ github.event.pull_request.number }}
+          
       - name: Get PR number
         run: |
           echo ${{ steps.get_version.outputs.VERSION }}
