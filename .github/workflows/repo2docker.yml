@@ -26,20 +26,14 @@ jobs:
         shell: bash
       - uses: jwalton/gh-find-current-pr@v1
         id: findPr
-      # This will echo "Your PR is 7", or be skipped if there is no current PR.
-      - run: echo "Your PR is ${PR}"
-        if: success() && ${{ steps.findPr.outputs.number }}
-        env:
-          PR: ${{ steps.findPr.outputs.pr }}
       - name: Get the tag version or the PR number
         id: get_version
         run: |
           if [[ ${{ github.ref }} =~ 'refs/tags/' ]]; then
-            echo ::set-output name=VERSION::${{ github.event.pull_request.number }}
-          else
             echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
+          else
+            echo ::set-output name=VERSION::${{ steps.findPr.outputs.pr }}
           fi
-          echo ${{ github.event.pull_request.number }}
       - name: Get PR number
         run: |
           echo ${{ steps.get_version.outputs.VERSION }}
