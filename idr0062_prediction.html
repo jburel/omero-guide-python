@@ -1,0 +1,1357 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Load Image with labels from IDR, analyze using StarDist and compare results &#8212; My sample book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Content with notebooks" href="notebooks.html" />
+    <link rel="prev" title="Welcome to the OMERO Python API" href="intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to the OMERO Python API
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Load Image with labels from IDR, analyze using StarDist and compare results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/idr0062_prediction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fidr0062_prediction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/idr0062_prediction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-dependencies-if-required">
+   Install dependencies if required
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import">
+   Import
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-connection-to-idr">
+     Create a connection to IDR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#idr-image-to-analyze">
+   IDR image to analyze
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#helper-method-to-load-the-5d-image">
+   Helper method to load the 5D image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-binary-data">
+   Load the binary data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-stardist-trained-model">
+   Load StarDist trained model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-based-on-a-default-stardist-model">
+   Prediction based on a default StarDist model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-original-labels">
+   Load the original labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-labels">
+   Compare labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#close-the-connection">
+   Close the connection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-the-stardist-labels">
+   Save the StarDist labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#license-bsd-2-clause">
+     License (BSD 2-Clause)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Load Image with labels from IDR, analyze using StarDist and compare results</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-dependencies-if-required">
+   Install dependencies if required
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import">
+   Import
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-connection-to-idr">
+     Create a connection to IDR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#idr-image-to-analyze">
+   IDR image to analyze
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#helper-method-to-load-the-5d-image">
+   Helper method to load the 5D image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-binary-data">
+   Load the binary data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-stardist-trained-model">
+   Load StarDist trained model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-based-on-a-default-stardist-model">
+   Prediction based on a default StarDist model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-original-labels">
+   Load the original labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-labels">
+   Compare labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#close-the-connection">
+   Close the connection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-the-stardist-labels">
+   Save the StarDist labels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#license-bsd-2-clause">
+     License (BSD 2-Clause)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="load-image-with-labels-from-idr-analyze-using-stardist-and-compare-results">
+<h1>Load Image with labels from IDR, analyze using StarDist and compare results<a class="headerlink" href="#load-image-with-labels-from-idr-analyze-using-stardist-and-compare-results" title="Permalink to this headline">¶</a></h1>
+<p>The notebook shows how to load an IDR image with labels.</p>
+<p>The image is referenced in the paper “NesSys: a novel method for accurate nuclear segmentation in 3D” published August 2019 in PLOS Biology: <a class="reference external" href="https://doi.org/10.1371/journal.pbio.3000388">https://doi.org/10.1371/journal.pbio.3000388</a> and can be viewed online in the <a class="reference external" href="https://idr.openmicroscopy.org/webclient/?show=image-6001247">Image Data Resource</a>.</p>
+<p>In this notebook, the image is loaded together with the labels and analyzed using <a class="reference external" href="https://github.com/stardist/stardist">StarDist</a>. The StarDist analysis produces a segmentation, which is then viewed side-by-side with the original segmentations produced by the authors of the paper obtained via the loaded labels.</p>
+<p>If you wish to run the notebook locally or run the corresponding <span class="xref myst">Python script</span>, please read instruction in <a class="reference external" href="https://github.com/ome/omero-guide-python/blob/master/README.md">README</a>.</p>
+<div class="section" id="install-dependencies-if-required">
+<h2>Install dependencies if required<a class="headerlink" href="#install-dependencies-if-required" title="Permalink to this headline">¶</a></h2>
+<p>The cell below will install dependencies if you choose to run the notebook in <a class="reference external" href="https://colab.research.google.com/notebooks/intro.ipynb#recent=true">Google Colab</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install omero-py stardist==0.8.1 geojson omero-cli-zarr
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting omero-py
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached omero_py-5.11.2-py3-none-any.whl (2.8 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting stardist==0.8.1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached stardist-0.8.1-cp39-cp39-macosx_10_15_x86_64.whl (1.9 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting geojson
+  Using cached geojson-2.5.0-py2.py3-none-any.whl (14 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting omero-cli-zarr
+  Using cached omero_cli_zarr-0.3.0-py3-none-any.whl (24 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scikit-image
+  Using cached scikit_image-0.19.2-cp39-cp39-macosx_10_13_x86_64.whl (13.3 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting numba
+  Using cached numba-0.55.2-cp39-cp39-macosx_10_14_x86_64.whl (2.3 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting csbdeep&gt;=0.6.3
+  Using cached csbdeep-0.7.1-py2.py3-none-any.whl (69 kB)
+Requirement already satisfied: imageio in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from stardist==0.8.1) (2.19.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting zeroc-ice&lt;3.7,&gt;=3.6.4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached zeroc-ice-3.6.5.tar.gz (1.2 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: PyYAML in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from omero-py) (6.0)
+Requirement already satisfied: numpy in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from omero-py) (1.22.4)
+Requirement already satisfied: requests in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from omero-py) (2.27.1)
+Requirement already satisfied: Pillow in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from omero-py) (9.1.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting future
+  Using cached future-0.18.2-py3-none-any.whl
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting appdirs
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ome-zarr&gt;=0.3.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached ome_zarr-0.4.2-py3-none-any.whl (32 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting h5py&gt;=3
+  Using cached h5py-3.7.0-cp39-cp39-macosx_10_9_x86_64.whl (3.2 MB)
+Requirement already satisfied: packaging in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (21.3)
+Requirement already satisfied: six in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (1.16.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting tqdm
+  Using cached tqdm-4.64.0-py2.py3-none-any.whl (78 kB)
+Requirement already satisfied: scipy in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (1.8.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting matplotlib
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached matplotlib-3.5.2-cp39-cp39-macosx_10_9_x86_64.whl (7.3 MB)
+Requirement already satisfied: tifffile in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (2022.5.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting zarr&gt;=2.8.1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached zarr-2.11.3-py3-none-any.whl (153 kB)
+Requirement already satisfied: aiohttp&lt;4 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (3.8.1)
+Requirement already satisfied: fsspec[s3]!=2021.07.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (2022.5.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting dask
+  Using cached dask-2022.5.2-py3-none-any.whl (1.1 MB)
+Requirement already satisfied: toolz in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (0.11.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.7.2)
+Requirement already satisfied: charset-normalizer&lt;3.0,&gt;=2.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (2.0.11)
+Requirement already satisfied: attrs&gt;=17.3.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (21.4.0)
+Requirement already satisfied: async-timeout&lt;5.0,&gt;=4.0.0a3 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (4.0.2)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.3.0)
+Requirement already satisfied: aiosignal&gt;=1.1.2 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.2.0)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (6.0.2)
+Requirement already satisfied: s3fs in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (2022.5.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&gt;=2.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from yarl&lt;2.0,&gt;=1.0-&gt;aiohttp&lt;4-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (3.3)
+Requirement already satisfied: numcodecs&gt;=0.6.4 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from zarr&gt;=2.8.1-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (0.9.1)
+Requirement already satisfied: asciitree in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from zarr&gt;=2.8.1-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (0.3.3)
+Requirement already satisfied: fasteners in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from zarr&gt;=2.8.1-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (0.17.3)
+Requirement already satisfied: cloudpickle&gt;=1.1.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from dask-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (2.1.0)
+Requirement already satisfied: partd&gt;=0.3.10 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from dask-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.2.0)
+Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from packaging-&gt;csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (3.0.7)
+Requirement already satisfied: locket in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from partd&gt;=0.3.10-&gt;dask-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: cycler&gt;=0.10 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from matplotlib-&gt;csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (0.11.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from matplotlib-&gt;csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (1.4.2)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from matplotlib-&gt;csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (4.33.3)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from matplotlib-&gt;csbdeep&gt;=0.6.3-&gt;stardist==0.8.1) (2.8.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting llvmlite&lt;0.39,&gt;=0.38.0rc1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Using cached llvmlite-0.38.1-cp39-cp39-macosx_10_9_x86_64.whl (25.5 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: setuptools in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from numba-&gt;stardist==0.8.1) (58.0.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from requests-&gt;omero-py) (1.26.8)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from requests-&gt;omero-py) (2021.10.8)
+Requirement already satisfied: aiobotocore~=2.3.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from s3fs-&gt;fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (2.3.2)
+Requirement already satisfied: aioitertools&gt;=0.5.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiobotocore~=2.3.0-&gt;s3fs-&gt;fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (0.10.0)
+Requirement already satisfied: wrapt&gt;=1.10.10 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiobotocore~=2.3.0-&gt;s3fs-&gt;fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.14.1)
+Requirement already satisfied: botocore&lt;1.24.22,&gt;=1.24.21 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aiobotocore~=2.3.0-&gt;s3fs-&gt;fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.24.21)
+Requirement already satisfied: typing_extensions&gt;=4.0 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from aioitertools&gt;=0.5.1-&gt;aiobotocore~=2.3.0-&gt;s3fs-&gt;fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (4.2.0)
+Requirement already satisfied: jmespath&lt;2.0.0,&gt;=0.7.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from botocore&lt;1.24.22,&gt;=1.24.21-&gt;aiobotocore~=2.3.0-&gt;s3fs-&gt;fsspec[s3]!=2021.07.0-&gt;ome-zarr&gt;=0.3.0-&gt;omero-cli-zarr) (1.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: PyWavelets&gt;=1.1.1 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from scikit-image-&gt;stardist==0.8.1) (1.3.0)
+Requirement already satisfied: networkx&gt;=2.2 in /Users/jmarie/opt/anaconda3/envs/git/lib/python3.9/site-packages (from scikit-image-&gt;stardist==0.8.1) (2.8.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building wheels for collected packages: zeroc-ice
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for zeroc-ice (setup.py) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> error
+<span class=" -Color -Color-Red">  ERROR: Command errored out with exit status 1:</span>
+<span class=" -Color -Color-Red">   command: /Users/jmarie/opt/anaconda3/envs/git/bin/python -u -c &#39;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#39;&quot;&#39;&quot;&#39;/private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py&#39;&quot;&#39;&quot;&#39;; __file__=&#39;&quot;&#39;&quot;&#39;/private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py&#39;&quot;&#39;&quot;&#39;;f = getattr(tokenize, &#39;&quot;&#39;&quot;&#39;open&#39;&quot;&#39;&quot;&#39;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#39;&quot;&#39;&quot;&#39;from setuptools import setup; setup()&#39;&quot;&#39;&quot;&#39;);code = f.read().replace(&#39;&quot;&#39;&quot;&#39;\r\n&#39;&quot;&#39;&quot;&#39;, &#39;&quot;&#39;&quot;&#39;\n&#39;&quot;&#39;&quot;&#39;);f.close();exec(compile(code, __file__, &#39;&quot;&#39;&quot;&#39;exec&#39;&quot;&#39;&quot;&#39;))&#39; bdist_wheel -d /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-wheel-5spnhjpf</span>
+<span class=" -Color -Color-Red">       cwd: /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/</span>
+<span class=" -Color -Color-Red">  Complete output (189 lines):</span>
+<span class=" -Color -Color-Red">  /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py:111: SyntaxWarning: &quot;is not&quot; with a literal. Did you mean &quot;!=&quot;?</span>
+<span class=" -Color -Color-Red">    if platform is not &#39;freebsd&#39;:</span>
+<span class=" -Color -Color-Red">  WARNING: &#39;&#39; not a valid package name; please use only .-separated package names in setup.py</span>
+<span class=" -Color -Color-Red">  running bdist_wheel</span>
+<span class=" -Color -Color-Red">  running build</span>
+<span class=" -Color -Color-Red">  running build_py</span>
+<span class=" -Color -Color-Red">  creating build</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Session_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Locator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Properties_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_FileParser_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceStorm_Metrics_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IcePatch2_FileServer_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_RouterF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ServantLocatorF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Logger_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ObjectAdapterF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ConnectionF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ImplicitContextF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Endpoint_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Observer_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Admin_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_InstrumentationF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_LocatorF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_PropertiesAdmin_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/slice2py.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_LocalException_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ObjectFactory_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Communicator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_Metrics_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_UserAccountMapper_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_FacetMap_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_Session_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_PermissionsVerifierF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ImplicitContext_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Plugin_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Instrumentation_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_CommunicatorF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Version_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Current_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_BuiltinSequences_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Identity_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Router_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Descriptor_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_RouterF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_SSLInfo_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Process_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Registry_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Connection_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceBox_IceBox_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Exception_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IcePatch2_FileInfo_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_SliceChecksumDict_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ObjectFactoryF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_LoggerF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_PropertiesF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Locator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_Router_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid_Query_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_PluginF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ObjectAdapter_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_Metrics_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ServantLocator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_EndpointTypes_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Glacier2_PermissionsVerifier_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_EndpointF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/IceStorm_IceStorm_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_ProcessF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  copying lib/Ice_RemoteLogger_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/IceGrid/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceGrid</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/IceMX</span>
+<span class=" -Color -Color-Red">  copying lib/IceMX/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceMX</span>
+<span class=" -Color -Color-Red">  package init file &#39;lib/slice/__init__.py&#39; not found (or not a regular file)</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/IcePatch2</span>
+<span class=" -Color -Color-Red">  copying lib/IcePatch2/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IcePatch2</span>
+<span class=" -Color -Color-Red">  package init file &#39;lib/zeroc_ice.egg-info/__init__.py&#39; not found (or not a regular file)</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/IceStorm</span>
+<span class=" -Color -Color-Red">  copying lib/IceStorm/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceStorm</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/IceBox</span>
+<span class=" -Color -Color-Red">  copying lib/IceBox/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceBox</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/UserAccountMapper.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/FileParser.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Registry.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Session.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Locator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Observer.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/PluginFacade.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Admin.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Descriptor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Query.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceGrid/Exception.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/Transaction.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/Connection.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/TransactionalEvictor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/CatalogData.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/ConnectionF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/EvictorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/EvictorStorage.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/DB.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/BackgroundSaveEvictor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/Exception.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Freeze/Evictor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IceDiscovery</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceDiscovery/IceDiscovery.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceDiscovery</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IcePatch2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IcePatch2/FileServer.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IcePatch2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IcePatch2/FileInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IcePatch2</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ObjectAdapter.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/SliceChecksumDict.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ImplicitContextF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Logger.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Connection.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/RemoteLogger.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/PropertiesAdmin.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/EndpointF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Communicator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Plugin.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ObjectAdapterF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Properties.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ConnectionF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/LocalException.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Locator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/PluginF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/PropertiesF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/BuiltinSequences.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Version.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ObjectFactoryF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ServantLocator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/InstrumentationF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Router.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Endpoint.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Metrics.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ObjectFactory.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Instrumentation.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Identity.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/LoggerF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/LocatorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/EndpointTypes.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/CommunicatorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Current.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ProcessF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/RouterF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/Process.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ImplicitContext.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/FacetMap.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Ice/ServantLocatorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/Session.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/PermissionsVerifier.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/PermissionsVerifierF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/SSLInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/Router.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/Metrics.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  copying lib/slice/Glacier2/RouterF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IceStorm</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceStorm/IceStorm.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceStorm</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceStorm/Metrics.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceStorm</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IceLocatorDiscovery</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceLocatorDiscovery/IceLocatorDiscovery.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceLocatorDiscovery</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IceSSL</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceSSL/EndpointInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceSSL</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceSSL/ConnectionInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceSSL</span>
+<span class=" -Color -Color-Red">  creating build/lib.macosx-10.9-x86_64-3.9/slice/IceBox</span>
+<span class=" -Color -Color-Red">  copying lib/slice/IceBox/IceBox.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceBox</span>
+<span class=" -Color -Color-Red">  running build_ext</span>
+<span class=" -Color -Color-Red">  building &#39;IcePy&#39; extension</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/Ice</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceDiscovery</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceLocatorDiscovery</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceSSL</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceUtil</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/Slice</span>
+<span class=" -Color -Color-Red">  creating build/temp.macosx-10.9-x86_64-3.9/src/ice/mcpp</span>
+<span class=" -Color -Color-Red">  clang -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /Users/jmarie/opt/anaconda3/envs/git/include -I/Users/jmarie/opt/anaconda3/envs/git/include -fPIC -O2 -isystem /Users/jmarie/opt/anaconda3/envs/git/include -arch x86_64 -DICE_STATIC_LIBS -Isrc -Isrc/ice/cpp/include -Isrc/ice/cpp/src -I/Users/jmarie/opt/anaconda3/envs/git/include/python3.9 -c src/BatchRequestInterceptor.cpp -o build/temp.macosx-10.9-x86_64-3.9/src/BatchRequestInterceptor.o -w</span>
+<span class=" -Color -Color-Red">  xcode-select: note: no developer tools were found at &#39;/Applications/Xcode.app&#39;, requesting install. Choose an option in the dialog to download the command line developer tools.</span>
+<span class=" -Color -Color-Red">  error: command &#39;/usr/bin/clang&#39; failed with exit code 1</span>
+<span class=" -Color -Color-Red">  ----------------------------------------</span>
+<span class=" -Color -Color-Red">  ERROR: Failed building wheel for zeroc-ice</span>
+?25h  Running setup.py clean for zeroc-ice
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed to build zeroc-ice
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: zeroc-ice, zarr, tqdm, scikit-image, matplotlib, llvmlite, h5py, future, dask, appdirs, omero-py, ome-zarr, numba, csbdeep, stardist, omero-cli-zarr, geojson
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Running setup.py install for zeroc-ice ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> error
+<span class=" -Color -Color-Red">    ERROR: Command errored out with exit status 1:</span>
+<span class=" -Color -Color-Red">     command: /Users/jmarie/opt/anaconda3/envs/git/bin/python -u -c &#39;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#39;&quot;&#39;&quot;&#39;/private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py&#39;&quot;&#39;&quot;&#39;; __file__=&#39;&quot;&#39;&quot;&#39;/private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py&#39;&quot;&#39;&quot;&#39;;f = getattr(tokenize, &#39;&quot;&#39;&quot;&#39;open&#39;&quot;&#39;&quot;&#39;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#39;&quot;&#39;&quot;&#39;from setuptools import setup; setup()&#39;&quot;&#39;&quot;&#39;);code = f.read().replace(&#39;&quot;&#39;&quot;&#39;\r\n&#39;&quot;&#39;&quot;&#39;, &#39;&quot;&#39;&quot;&#39;\n&#39;&quot;&#39;&quot;&#39;);f.close();exec(compile(code, __file__, &#39;&quot;&#39;&quot;&#39;exec&#39;&quot;&#39;&quot;&#39;))&#39; install --record /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-record-lnv60ncs/install-record.txt --single-version-externally-managed --compile --install-headers /Users/jmarie/opt/anaconda3/envs/git/include/python3.9/zeroc-ice</span>
+<span class=" -Color -Color-Red">         cwd: /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/</span>
+<span class=" -Color -Color-Red">    Complete output (189 lines):</span>
+<span class=" -Color -Color-Red">    /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py:111: SyntaxWarning: &quot;is not&quot; with a literal. Did you mean &quot;!=&quot;?</span>
+<span class=" -Color -Color-Red">      if platform is not &#39;freebsd&#39;:</span>
+<span class=" -Color -Color-Red">    WARNING: &#39;&#39; not a valid package name; please use only .-separated package names in setup.py</span>
+<span class=" -Color -Color-Red">    running install</span>
+<span class=" -Color -Color-Red">    running build</span>
+<span class=" -Color -Color-Red">    running build_py</span>
+<span class=" -Color -Color-Red">    creating build</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Session_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Locator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Properties_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_FileParser_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceStorm_Metrics_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IcePatch2_FileServer_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_RouterF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ServantLocatorF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Logger_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ObjectAdapterF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ConnectionF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ImplicitContextF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Endpoint_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Observer_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Admin_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_InstrumentationF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_LocatorF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_PropertiesAdmin_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/slice2py.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_LocalException_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ObjectFactory_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Communicator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_Metrics_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_UserAccountMapper_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_FacetMap_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_Session_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_PermissionsVerifierF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ImplicitContext_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Plugin_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Instrumentation_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_CommunicatorF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Version_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Current_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_BuiltinSequences_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Identity_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Router_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Descriptor_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_RouterF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_SSLInfo_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Process_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Registry_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Connection_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceBox_IceBox_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Exception_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IcePatch2_FileInfo_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_SliceChecksumDict_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ObjectFactoryF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_LoggerF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_PropertiesF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Locator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_Router_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid_Query_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_PluginF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ObjectAdapter_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_Metrics_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ServantLocator_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_EndpointTypes_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Glacier2_PermissionsVerifier_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_EndpointF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/IceStorm_IceStorm_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_ProcessF_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    copying lib/Ice_RemoteLogger_ice.py -&gt; build/lib.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/IceGrid/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceGrid</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/IceMX</span>
+<span class=" -Color -Color-Red">    copying lib/IceMX/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceMX</span>
+<span class=" -Color -Color-Red">    package init file &#39;lib/slice/__init__.py&#39; not found (or not a regular file)</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/IcePatch2</span>
+<span class=" -Color -Color-Red">    copying lib/IcePatch2/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IcePatch2</span>
+<span class=" -Color -Color-Red">    package init file &#39;lib/zeroc_ice.egg-info/__init__.py&#39; not found (or not a regular file)</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/IceStorm</span>
+<span class=" -Color -Color-Red">    copying lib/IceStorm/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceStorm</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/IceBox</span>
+<span class=" -Color -Color-Red">    copying lib/IceBox/__init__.py -&gt; build/lib.macosx-10.9-x86_64-3.9/IceBox</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/UserAccountMapper.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/FileParser.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Registry.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Session.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Locator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Observer.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/PluginFacade.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Admin.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Descriptor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Query.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceGrid/Exception.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceGrid</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/Transaction.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/Connection.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/TransactionalEvictor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/CatalogData.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/ConnectionF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/EvictorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/EvictorStorage.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/DB.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/BackgroundSaveEvictor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/Exception.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Freeze/Evictor.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Freeze</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IceDiscovery</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceDiscovery/IceDiscovery.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceDiscovery</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IcePatch2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IcePatch2/FileServer.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IcePatch2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IcePatch2/FileInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IcePatch2</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ObjectAdapter.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/SliceChecksumDict.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ImplicitContextF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Logger.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Connection.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/RemoteLogger.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/PropertiesAdmin.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/EndpointF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Communicator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Plugin.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ObjectAdapterF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Properties.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ConnectionF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/LocalException.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Locator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/PluginF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/PropertiesF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/BuiltinSequences.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Version.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ObjectFactoryF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ServantLocator.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/InstrumentationF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Router.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Endpoint.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Metrics.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ObjectFactory.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Instrumentation.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Identity.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/LoggerF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/LocatorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/EndpointTypes.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/CommunicatorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Current.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ProcessF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/RouterF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/Process.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ImplicitContext.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/FacetMap.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Ice/ServantLocatorF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Ice</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/Session.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/PermissionsVerifier.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/PermissionsVerifierF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/SSLInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/Router.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/Metrics.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    copying lib/slice/Glacier2/RouterF.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/Glacier2</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IceStorm</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceStorm/IceStorm.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceStorm</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceStorm/Metrics.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceStorm</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IceLocatorDiscovery</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceLocatorDiscovery/IceLocatorDiscovery.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceLocatorDiscovery</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IceSSL</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceSSL/EndpointInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceSSL</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceSSL/ConnectionInfo.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceSSL</span>
+<span class=" -Color -Color-Red">    creating build/lib.macosx-10.9-x86_64-3.9/slice/IceBox</span>
+<span class=" -Color -Color-Red">    copying lib/slice/IceBox/IceBox.ice -&gt; build/lib.macosx-10.9-x86_64-3.9/slice/IceBox</span>
+<span class=" -Color -Color-Red">    running build_ext</span>
+<span class=" -Color -Color-Red">    building &#39;IcePy&#39; extension</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/Ice</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceDiscovery</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceLocatorDiscovery</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceSSL</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/IceUtil</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/cpp/src/Slice</span>
+<span class=" -Color -Color-Red">    creating build/temp.macosx-10.9-x86_64-3.9/src/ice/mcpp</span>
+<span class=" -Color -Color-Red">    clang -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /Users/jmarie/opt/anaconda3/envs/git/include -I/Users/jmarie/opt/anaconda3/envs/git/include -fPIC -O2 -isystem /Users/jmarie/opt/anaconda3/envs/git/include -arch x86_64 -DICE_STATIC_LIBS -Isrc -Isrc/ice/cpp/include -Isrc/ice/cpp/src -I/Users/jmarie/opt/anaconda3/envs/git/include/python3.9 -c src/BatchRequestInterceptor.cpp -o build/temp.macosx-10.9-x86_64-3.9/src/BatchRequestInterceptor.o -w</span>
+<span class=" -Color -Color-Red">    xcode-select: note: no developer tools were found at &#39;/Applications/Xcode.app&#39;, requesting install. Choose an option in the dialog to download the command line developer tools.</span>
+<span class=" -Color -Color-Red">    error: command &#39;/usr/bin/clang&#39; failed with exit code 1</span>
+<span class=" -Color -Color-Red">    ----------------------------------------</span>
+<span class=" -Color -Color-Red">ERROR: Command errored out with exit status 1: /Users/jmarie/opt/anaconda3/envs/git/bin/python -u -c &#39;import io, os, sys, setuptools, tokenize; sys.argv[0] = &#39;&quot;&#39;&quot;&#39;/private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py&#39;&quot;&#39;&quot;&#39;; __file__=&#39;&quot;&#39;&quot;&#39;/private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-install-j_oygw9c/zeroc-ice_880b1a43ea1e440ab6bc79a256e87663/setup.py&#39;&quot;&#39;&quot;&#39;;f = getattr(tokenize, &#39;&quot;&#39;&quot;&#39;open&#39;&quot;&#39;&quot;&#39;, open)(__file__) if os.path.exists(__file__) else io.StringIO(&#39;&quot;&#39;&quot;&#39;from setuptools import setup; setup()&#39;&quot;&#39;&quot;&#39;);code = f.read().replace(&#39;&quot;&#39;&quot;&#39;\r\n&#39;&quot;&#39;&quot;&#39;, &#39;&quot;&#39;&quot;&#39;\n&#39;&quot;&#39;&quot;&#39;);f.close();exec(compile(code, __file__, &#39;&quot;&#39;&quot;&#39;exec&#39;&quot;&#39;&quot;&#39;))&#39; install --record /private/var/folders/74/13j9m56j0l7cxdczjrykzqt40000gn/T/pip-record-lnv60ncs/install-record.txt --single-version-externally-managed --compile --install-headers /Users/jmarie/opt/anaconda3/envs/git/include/python3.9/zeroc-ice Check the logs for full command output.</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="import">
+<h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omero.gateway</span> <span class="kn">import</span> <span class="n">BlitzGateway</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">omero.gateway</span> <span class="kn">import</span> <span class="n">BlitzGateway</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;omero&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-connection-to-idr">
+<h3>Create a connection to IDR<a class="headerlink" href="#create-a-connection-to-idr" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">HOST</span> <span class="o">=</span> <span class="s1">&#39;ws://idr.openmicroscopy.org/omero-ws&#39;</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">BlitzGateway</span><span class="p">(</span><span class="s1">&#39;public&#39;</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">,</span>
+                    <span class="n">host</span><span class="o">=</span><span class="n">HOST</span><span class="p">,</span> <span class="n">secure</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">connect</span><span class="p">())</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">enableKeepAlive</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="idr-image-to-analyze">
+<h2>IDR image to analyze<a class="headerlink" href="#idr-image-to-analyze" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_id</span> <span class="o">=</span> <span class="mi">6001247</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;Image&quot;</span><span class="p">,</span> <span class="n">image_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="helper-method-to-load-the-5d-image">
+<h2>Helper method to load the 5D image<a class="headerlink" href="#helper-method-to-load-the-5d-image" title="Permalink to this headline">¶</a></h2>
+<p>The image is loaded a TCZYX numpy array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_numpy_array</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">pixels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getPrimaryPixels</span><span class="p">()</span>
+    <span class="n">size_z</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeZ</span><span class="p">()</span>
+    <span class="n">size_c</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeC</span><span class="p">()</span>
+    <span class="n">size_t</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeT</span><span class="p">()</span>
+    <span class="n">size_y</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeY</span><span class="p">()</span>
+    <span class="n">size_x</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeX</span><span class="p">()</span>
+    <span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="c1"># first plane of the image</span>
+
+    <span class="n">zct_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size_t</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size_c</span><span class="p">):</span>  <span class="c1"># all channels</span>
+            <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size_z</span><span class="p">):</span>  <span class="c1"># get the Z-stack</span>
+                <span class="n">zct_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Load all the planes as YX numpy array</span>
+    <span class="n">planes</span> <span class="o">=</span> <span class="n">pixels</span><span class="o">.</span><span class="n">getPlanes</span><span class="p">(</span><span class="n">zct_list</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;t:</span><span class="si">%s</span><span class="s2"> c:</span><span class="si">%s</span><span class="s2"> z:</span><span class="si">%s</span><span class="s2"> y:</span><span class="si">%s</span><span class="s2"> x:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size_t</span><span class="p">,</span> <span class="n">size_c</span><span class="p">,</span> <span class="n">size_z</span><span class="p">,</span> <span class="n">size_y</span><span class="p">,</span> <span class="n">size_x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading image </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">image</span><span class="o">.</span><span class="n">getName</span><span class="p">())</span>
+    <span class="n">all_planes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">planes</span><span class="p">))</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">size_t</span><span class="p">,</span> <span class="n">size_c</span><span class="p">,</span> <span class="n">size_z</span><span class="p">,</span> <span class="n">size_y</span><span class="p">,</span> <span class="n">size_x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">all_planes</span><span class="p">,</span> <span class="n">newshape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-the-binary-data">
+<h2>Load the binary data<a class="headerlink" href="#load-the-binary-data" title="Permalink to this headline">¶</a></h2>
+<p>Load the binary data as a numpy array</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">load_numpy_array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:1 c:2 z:257 y:210 x:253
+Downloading image B4_C3.tif
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-stardist-trained-model">
+<h2>Load StarDist trained model<a class="headerlink" href="#load-stardist-trained-model" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stardist.models</span> <span class="kn">import</span> <span class="n">StarDist2D</span>
+<span class="n">model_versatile</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;2D_demo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found model &#39;2D_demo&#39; for &#39;StarDist2D&#39;.
+Downloading data from https://github.com/stardist/stardist-models/releases/download/v0.1/python_2D_demo.zip
+5300224/5298331 [==============================] - 1s 0us/step
+5308416/5298331 [==============================] - 1s 0us/step
+Loading network weights from &#39;weights_best.h5&#39;.
+Loading thresholds from &#39;thresholds.json&#39;.
+Using default values: prob_thresh=0.486166, nms_thresh=0.5.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="prediction-based-on-a-default-stardist-model">
+<h2>Prediction based on a default StarDist model<a class="headerlink" href="#prediction-based-on-a-default-stardist-model" title="Permalink to this headline">¶</a></h2>
+<p>Normalize the input image</p>
+<p><code class="docutils literal notranslate"><span class="pre">model_versatile.predict_instances</span></code> will</p>
+<ul class="simple">
+<li><p>predict object probabilities and star-convex polygon distances (see model.predict if you want those)</p></li>
+<li><p>perform non-maximum suppression (with overlap threshold nms_thresh) for polygons above object probability threshold prob_thresh.</p></li>
+<li><p>render all remaining polygon instances in a label image</p></li>
+<li><p>return the label instances image and also the details (coordinates, etc.) of all remaining polygons</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">csbdeep.utils</span> <span class="kn">import</span> <span class="n">normalize</span>
+<span class="n">axis_norm</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="mi">1</span><span class="p">,</span><span class="mf">99.8</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis_norm</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">results_details</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="p">)):</span>
+    <span class="n">new_labels</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">model_versatile</span><span class="o">.</span><span class="n">predict_instances</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">results_details</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">details</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_labels</span><span class="p">)</span>
+
+<span class="n">label_slices</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="load-the-original-labels">
+<h2>Load the original labels<a class="headerlink" href="#load-the-original-labels" title="Permalink to this headline">¶</a></h2>
+<p>Load the original labels in order to compare them with the StarDist ones
+Original labels have been saved as mask.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">omero_zarr</span> <span class="kn">import</span> <span class="n">masks</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roi_service</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">getRoiService</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">roi_service</span><span class="o">.</span><span class="n">findByImage</span><span class="p">(</span><span class="n">image_id</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="n">dims</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">getSizeT</span><span class="p">(),</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeC</span><span class="p">(),</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeZ</span><span class="p">(),</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeY</span><span class="p">(),</span> <span class="n">image</span><span class="o">.</span><span class="n">getSizeX</span><span class="p">())</span>
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">roi</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">rois</span><span class="p">:</span>
+    <span class="n">shapes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roi</span><span class="o">.</span><span class="n">copyShapes</span><span class="p">())</span>
+
+<span class="n">saver</span> <span class="o">=</span> <span class="n">masks</span><span class="o">.</span><span class="n">MaskSaver</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">fillColors</span><span class="p">,</span> <span class="n">properties</span> <span class="o">=</span> <span class="n">saver</span><span class="o">.</span><span class="n">masks_to_labels</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">mask_shape</span><span class="o">=</span><span class="n">dims</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, 257, 210, 253)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="compare-labels">
+<h2>Compare labels<a class="headerlink" href="#compare-labels" title="Permalink to this headline">¶</a></h2>
+<p>Display the original labels and the labels based on StarDist prediction side-by-side</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">label_slices</span><span class="p">[</span><span class="n">z</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">flush_events</span><span class="p">()</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Select Z&quot;</span><span class="p">,</span> <span class="n">continuous_update</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "52aebbafa3b641d0b6d557420ae6bc7b", "version_major": 2, "version_minor": 0}
+</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.update(z=0)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="close-the-connection">
+<h2>Close the connection<a class="headerlink" href="#close-the-connection" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-the-stardist-labels">
+<h2>Save the StarDist labels<a class="headerlink" href="#save-the-stardist-labels" title="Permalink to this headline">¶</a></h2>
+<p>StarDist offers method to save the labels into ImageJ rois using <code class="docutils literal notranslate"><span class="pre">export_imagej_rois</span></code>. This is outside the scope of this notebook.</p>
+<p>Below we show how to save the segmentation represented as polygon details locally in a machine- and human-readable format: <strong>geojson</strong>.</p>
+<ul class="simple">
+<li><p>Convert the StarDist polygon coordinates into geojson Polygons</p></li>
+<li><p>Save the output in the <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> folder in a <code class="docutils literal notranslate"><span class="pre">.geojson</span></code> file.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert into Polygon and add to Geometry Collection</span>
+<span class="kn">from</span> <span class="nn">geojson</span> <span class="kn">import</span> <span class="n">Feature</span><span class="p">,</span> <span class="n">FeatureCollection</span><span class="p">,</span> <span class="n">Polygon</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results_details</span><span class="p">)):</span>
+    <span class="n">details</span> <span class="o">=</span> <span class="n">results_details</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">region</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">details</span><span class="p">[</span><span class="s1">&#39;coord&#39;</span><span class="p">]):</span>
+        <span class="n">coordinates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">region</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">region</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+            <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">])))</span>
+        <span class="c1"># append the first coordinate to close the polygon</span>
+        <span class="n">coordinates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;stroke-width&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">shapes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Feature</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">))</span>    
+
+<span class="n">gc</span> <span class="o">=</span> <span class="n">FeatureCollection</span><span class="p">(</span><span class="n">shapes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the shapes as geojson</span>
+<span class="kn">import</span> <span class="nn">geojson</span>
+<span class="n">geojson_file</span> <span class="o">=</span> <span class="s2">&quot;stardist_shapes_</span><span class="si">%s</span><span class="s2">.geojson&quot;</span> <span class="o">%</span> <span class="n">image_id</span>
+<span class="n">geojson_dump</span> <span class="o">=</span> <span class="n">geojson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">gc</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">geojson_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">geojson_dump</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<p><strong>Exercise 1:</strong></p>
+<ul class="simple">
+<li><p>Using the json library, read the geojson file into a variable in this notebook</p></li>
+<li><p>Display the shapes on a selected z-section e.g. z = 5.</p></li>
+</ul>
+<p><strong>Exercise 2:</strong></p>
+<ul class="simple">
+<li><p>Convert the StarDist labels into OMERO polygons.</p></li>
+<li><p>Save the converted labels to an OMERO.server if possible.</p></li>
+</ul>
+<p>See <span class="xref myst">Solutions</span></p>
+<div class="section" id="license-bsd-2-clause">
+<h3>License (BSD 2-Clause)<a class="headerlink" href="#license-bsd-2-clause" title="Permalink to this headline">¶</a></h3>
+<p>Copyright (C) 2022 University of Dundee. All Rights Reserved.</p>
+<p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+<p>Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Welcome to the OMERO Python API</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="notebooks.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Content with notebooks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Jupyter Book Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
